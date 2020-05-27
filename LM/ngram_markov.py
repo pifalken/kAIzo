@@ -1,3 +1,7 @@
+"""
+WARNING: this is ugly. it was converted from a iPython notebook
+"""
+
 import os
 import logging
 import random
