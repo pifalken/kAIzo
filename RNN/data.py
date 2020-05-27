@@ -5,7 +5,6 @@ import numpy as np
 
 # return list of file names
 def get_level_files(data_dir: str) -> list:
-    print(data_dir)
     level_files = [f for f in os.listdir(data_dir) if os.path.isfile(os.path.join(data_dir, f))]
     return level_files
 

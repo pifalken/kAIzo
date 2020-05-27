@@ -99,6 +99,7 @@ def train(train_data, test_data, rnn_type: str, num_epochs: int, input_size: int
             loss.backward()
             
             # prevent the exploding &|| vanishing gradient problem in RNNs
+            # https://github.com/pytorch/examples/blob/984700d30e9bf1f2dc735e8a80de37cfa538ae17/word_language_model/main.py#L178
             torch.nn.utils.clip_grad_norm_(rnn.parameters(), 50.0)
             for p in rnn.parameters():
                 p.data.add(-lr, p.grad.data)
@@ -125,8 +126,10 @@ def train(train_data, test_data, rnn_type: str, num_epochs: int, input_size: int
             with open(f"{SAVE_FILE}{game}_{rnn_type}.pt", "wb") as f:
                 torch.save(rnn, f)
 
-        sample(rnn, col_to_idx, idx_to_col, seq_len, "XX---XXXXXXXXX--------------", game, device)
-        #sample(rnn, col_to_idx, idx_to_col, seq_len, "---------XXXXX", game, device)
+        if game == "SMB1":
+            sample(rnn, col_to_idx, idx_to_col, seq_len, "---------XXXXX", game, device)
+        else:
+            sample(rnn, col_to_idx, idx_to_col, seq_len, "XX---XXXXXXXXX--------------", game, device)
         
 def evaluate(rnn, test_data, criterion, batch_size: int, seq_len: int, device):
     logging.info("evaluating model...")
