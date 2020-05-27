@@ -1,5 +1,5 @@
 # kAIzo
-VAE & RNN level generator for SMM2
+LM, RNN, & VAE level generator for SMM2
 
 ## running
 - LM:
